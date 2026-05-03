@@ -4,7 +4,7 @@ findspark
 pandas
 matplotlib
 seaborn
-datasets
+datasets<3.0.0
 scikit-learn
 kafka-python
 pyarrow

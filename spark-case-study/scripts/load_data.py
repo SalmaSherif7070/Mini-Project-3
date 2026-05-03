@@ -4,7 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 import pickle
 import os
 
-CATEGORY = "Video_Games"  # Change to: Electronics, Cell_Phones_and_Accessories, etc.
+CATEGORY = "Electronics"  # Change to: Electronics, Cell_Phones_and_Accessories, etc.
 MAX_RECORDS = 2_000_000
 OUTPUT_DIR = "/data"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
