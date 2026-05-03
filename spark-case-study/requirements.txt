@@ -4,3 +4,7 @@ findspark
 pandas
 matplotlib
 seaborn
+datasets
+scikit-learn
+kafka-python
+pyarrow
