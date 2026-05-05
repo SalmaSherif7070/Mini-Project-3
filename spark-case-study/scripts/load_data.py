@@ -16,8 +16,15 @@ dataset = load_dataset(
     trust_remote_code=True
 )
 
-df = dataset["full"].to_pandas()
-print(f"Total records loaded: {len(df):,}")
+full_ds = dataset["full"]
+print(f"Total records in dataset: {len(full_ds):,}")
+
+if len(full_ds) > MAX_RECORDS:
+    print(f"Sampling down to {MAX_RECORDS:,} records to avoid OOM...")
+    full_ds = full_ds.shuffle(seed=42).select(range(MAX_RECORDS))
+
+df = full_ds.to_pandas()
+print(f"Total records loaded into pandas: {len(df):,}")
 
 df = df[["user_id", "parent_asin", "rating", "timestamp"]].copy()
 df.columns = ["user_id", "item_id", "rating", "timestamp"]
@@ -31,10 +38,6 @@ le_user = LabelEncoder()
 le_item = LabelEncoder()
 df["user_id_int"] = le_user.fit_transform(df["user_id"])
 df["item_id_int"] = le_item.fit_transform(df["item_id"])
-
-if len(df) > MAX_RECORDS:
-    df = df.sample(n=MAX_RECORDS, random_state=42)
-    print(f"Sampled down to {MAX_RECORDS:,} records")
 
 train = df.sample(frac=0.8, random_state=42)
 test  = df.drop(train.index)
