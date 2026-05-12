@@ -15,6 +15,7 @@ services:
       - "7077:7077" # Spark Master Internal Port
       - "8888:8888" # Jupyter Lab
       - "4040:4040" # Spark Job UI (Captured for your report)
+      - "8501:8501" # Dashboard
     volumes:
       - .:/app
       - ./retail_data:/data
